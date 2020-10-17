@@ -1,5 +1,6 @@
 # Simple temperature conversion script to calculate (°C to °F) or (°F to °C).
 
+
 def fahrenheit_to_celsius(celsius):
     """Accepts Fahrenheit temp from input and converts it to Celsius"""
     celsius = ((float(celsius) - 32) * 5 / 9)
@@ -12,26 +13,18 @@ def celsius_to_fahrenheit(fahrenheit):
     return fahrenheit
 
 
-def convert_scale(_scale):
-    """Converts the scale from °C to °F or vise versa for display in final output"""
-    if _scale.upper() == "C":
-        _scale = "F"
-    elif _scale.upper() == "F":
-        _scale = "C"
-    return _scale
+CONVERTERS = {'C': celsius_to_fahrenheit,
+              'F': fahrenheit_to_celsius}
 
 
-scale = input("Enter C to convert Celsius or F to convert Fahrenheit: ")
+def convert():
+    temperature = input("Enter temperature for conversion example '98.8 F', '36.7 C': ")
+    scale = temperature[-1:].upper()
+    degree_scale = 'F' if scale.upper() == 'C' else 'C'
+    temp_val = temperature.split(' ')
+    result = CONVERTERS[scale](float(temp_val[0]))
+    print(f"{temperature} = {result:.1f} °{degree_scale}")
 
-if scale.upper() == "C" or scale.upper() == "F":
-    temperature = input(f"Enter {scale.upper()} temperature for conversion: ")
-    scale_conversion = convert_scale(scale)
-    if scale.upper() == "C":
-        temp_conversion = celsius_to_fahrenheit(temperature)
-        print(f"The temperature is {temp_conversion:.1f}° {scale_conversion}")
-    elif scale.upper() == "F":
-        temp_conversion = fahrenheit_to_celsius(temperature)
-        print(f"The temperature is {temp_conversion:.1f}° {scale_conversion}")
-else:
-    print("Invalid Option: Did not choose C or F for conversion.")
-    quit()
+
+if __name__ == '__main__':
+    convert()
