@@ -18,6 +18,8 @@ CONVERTERS = {'C': celsius_to_fahrenheit,
 
 
 def convert():
+    """Accepts temperature input from user then runs the temperature
+    through the conversion process."""
     temperature = input("Enter temperature for conversion example '98.8 F', '36.7 C': ")
     scale = temperature[-1:].upper()
     degree_scale = 'F' if scale.upper() == 'C' else 'C'
