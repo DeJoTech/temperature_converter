@@ -21,15 +21,13 @@ def convert():
     """Accepts temperature input from user then runs the temperature
     through the conversion process."""
     try:
-        temperature = input("Enter temperature for conversion example 98.8 F, 36.7 C: ")
-        scale = temperature[-1:].upper()
-        degree_scale = 'F' if scale.upper() == 'C' else 'C'
-        temp_val = temperature.split(' ')
-        result = CONVERTERS[scale](float(temp_val[0]))
-        print(f"{temp_val[0]}°{scale.upper()} = {result:.1f}°{degree_scale}")
+        temperature = input("Enter temperature for conversion example 98.8 F, 36.7 C: ").split(' ')
+        scale = 'F' if temperature[1].upper() == 'C' else 'C'
+        result = CONVERTERS[temperature[1].upper()](float(temperature[0]))
+        print(f"{temperature[0]}°{temperature[1].upper()} = {result:.1f}°{scale}")
     except KeyError:
         print("Invalid Scale: Enter scale as C or F")
-    except ValueError:
+    except (ValueError, IndexError):
         print("Invalid Format: Format example 98.6 F or 36 C  ")
 
 
