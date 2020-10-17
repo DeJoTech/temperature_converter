@@ -26,7 +26,7 @@ def convert():
         degree_scale = 'F' if scale.upper() == 'C' else 'C'
         temp_val = temperature.split(' ')
         result = CONVERTERS[scale](float(temp_val[0]))
-        print(f"{temperature} = {result:.1f} °{degree_scale}")
+        print(f"{temp_val[0]}°{scale.upper()} = {result:.1f}°{degree_scale}")
     except KeyError:
         print("Invalid Scale: Enter scale as C or F")
     except ValueError:
